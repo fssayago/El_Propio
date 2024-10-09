@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename = 'imgs/favicon.png') }}">
+    <title>Listado de registros con Flask y Python desde MySQL Remoto (clever-cloud.com)</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/milligram.min.css') }}">
+    <style>
+        h2{
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+   
+    
+    <div class="container">
+
+        <div class="row">
+            <div class="column">
+                <h2 class="text-center">
+                    Integrantes - Flask y Python desde MySQL Remoto (clever-cloud.com)
+                </h2>
+                <hr>
+            </div>
+          </div>
+            
+          <h3>Total de registros {{ dataTotal }}</h3>
+        <div class="row">
+            
+        <!-- {{ dataEmpleados }} -->
+        {% if (dataEmpleados) %}
+
+            <table>
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Sexo</th>
+                    <th>Comentario</th>
+                    <th>Descripción</th>
+                    <th>Fecha</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for empleado in dataEmpleados %}    
+                        <tr>
+                            <td>{{ empleado.nombre }}</td>
+                            <td>{{ empleado.sexo }}</td>
+                            <td>{{ empleado.likes }}
+                                {% if(empleado.likes == 1) %}
+                                    😀 
+                                {% else %}
+                                    😭
+                                {% endif %}
+                            </td>
+                            <td>{{ empleado.descripcion }}</td>
+                            <td>{{ empleado.fecha }} </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+        {% else %}
+            <p style="text-align: center;">No hay Empleados 😭 </p>
+        {% endif %}
+
+        </div>
+    </div>
+
+</body>
+</html>
